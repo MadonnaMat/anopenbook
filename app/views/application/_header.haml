@@ -1,0 +1,6 @@
+%nav.navbar.navbar-expand-lg.navbar-light.bg-light.border-bottom
+  = link_to root_path, class: 'navbar-brand' do
+    %span.h1 AnOpenBook
+  .navbar-nav.mr-auto
+  .navbar-nav
+    = link_to 'login', new_user_session_path, class: 'nav-link'
