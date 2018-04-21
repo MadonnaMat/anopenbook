@@ -1,0 +1,10 @@
+= form_for @synopsis do |f|
+  - if @synopsis.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@synopsis.errors.count, "error")} prohibited this synopsis from being saved:"
+      %ul
+        - @synopsis.errors.full_messages.each do |message|
+          %li= message
+
+  .actions
+    = f.submit 'Save'

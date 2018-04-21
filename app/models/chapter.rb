@@ -1,0 +1,2 @@
+class Chapter < Submission
+end

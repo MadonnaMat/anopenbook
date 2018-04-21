@@ -1,0 +1,10 @@
+= form_for @cover_art do |f|
+  - if @cover_art.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@cover_art.errors.count, "error")} prohibited this cover_art from being saved:"
+      %ul
+        - @cover_art.errors.full_messages.each do |message|
+          %li= message
+
+  .actions
+    = f.submit 'Save'

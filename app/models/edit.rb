@@ -1,0 +1,2 @@
+class Edit < Chapter
+end

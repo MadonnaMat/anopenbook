@@ -1,0 +1,19 @@
+%h1 Listing edits
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @edits.each do |edit|
+      %tr
+        %td= link_to 'Show', edit
+        %td= link_to 'Edit', edit_edit_path(edit)
+        %td= link_to 'Destroy', edit, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Edit', new_edit_path

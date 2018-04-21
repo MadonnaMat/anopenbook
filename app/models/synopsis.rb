@@ -1,0 +1,2 @@
+class Synopsis < Submission
+end

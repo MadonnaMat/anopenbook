@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Genre:
+  = @book.genre
+%p
+  %b Title:
+  = @book.title
+%p
+  %b Current step:
+  = @book.current_step
+%p
+  %b Current step ends at:
+  = @book.current_step_ends_at
+%p
+  %b Read count:
+  = @book.read_count
+%p
+  %b Slug:
+  = @book.slug
+
+= link_to 'Edit', edit_book_path(@book)
+\|
+= link_to 'Back', books_path

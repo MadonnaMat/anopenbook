@@ -1,0 +1,19 @@
+%h1 Listing synopses
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @synopses.each do |synopsis|
+      %tr
+        %td= link_to 'Show', synopsis
+        %td= link_to 'Edit', edit_synopsis_path(synopsis)
+        %td= link_to 'Destroy', synopsis, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Synopsis', new_synopsis_path

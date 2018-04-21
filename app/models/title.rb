@@ -1,0 +1,2 @@
+class Title < Submission
+end

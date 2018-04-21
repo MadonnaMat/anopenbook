@@ -1,0 +1,31 @@
+%h1 Listing books
+
+%table
+  %thead
+    %tr
+      %th Genre
+      %th Title
+      %th Current step
+      %th Current step ends at
+      %th Read count
+      %th Slug
+      %th
+      %th
+      %th
+
+  %tbody
+    - @books.each do |book|
+      %tr
+        %td= book.genre
+        %td= book.title
+        %td= book.current_step
+        %td= book.current_step_ends_at
+        %td= book.read_count
+        %td= book.slug
+        %td= link_to 'Show', book
+        %td= link_to 'Edit', edit_book_path(book)
+        %td= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Book', new_book_path

@@ -1,0 +1,2 @@
+class CoverArt < Submission
+end

@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Lulu:
+  = @order.lulu_id
+%p
+  %b Price:
+  = @order.price
+%p
+  %b Status:
+  = @order.status
+%p
+  %b User:
+  = @order.user
+%p
+  %b Book:
+  = @order.book
+
+= link_to 'Edit', edit_order_path(@order)
+\|
+= link_to 'Back', orders_path

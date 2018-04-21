@@ -1,0 +1,19 @@
+%h1 Listing cover_arts
+
+%table
+  %thead
+    %tr
+      %th
+      %th
+      %th
+
+  %tbody
+    - @cover_arts.each do |cover_art|
+      %tr
+        %td= link_to 'Show', cover_art
+        %td= link_to 'Edit', edit_cover_art_path(cover_art)
+        %td= link_to 'Destroy', cover_art, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Cover art', new_cover_art_path
