@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_21_185847) do
+ActiveRecord::Schema.define(version: 2018_04_21_193800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -58,10 +58,10 @@ ActiveRecord::Schema.define(version: 2018_04_21_185847) do
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
-    t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
     t.string "scope"
     t.datetime "created_at"
+    t.uuid "sluggable_id", null: false
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
@@ -88,7 +88,6 @@ ActiveRecord::Schema.define(version: 2018_04_21_185847) do
     t.integer "current_step"
     t.boolean "final_chapter"
     t.boolean "is_included"
-    t.boolean "frozen"
     t.boolean "is_submitted"
     t.boolean "in_conflict"
     t.uuid "user_id"
@@ -105,6 +104,7 @@ ActiveRecord::Schema.define(version: 2018_04_21_185847) do
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
     t.string "slug", null: false
+    t.boolean "is_frozen", default: false
     t.index ["book_id"], name: "index_submissions_on_book_id"
     t.index ["parent_id"], name: "index_submissions_on_parent_id"
     t.index ["slug"], name: "index_submissions_on_slug", unique: true
@@ -136,6 +136,7 @@ ActiveRecord::Schema.define(version: 2018_04_21_185847) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "unconfirmed_email"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
