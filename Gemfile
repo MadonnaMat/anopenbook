@@ -70,3 +70,5 @@ gem 'fast_jsonapi'
 gem 'graphql'
 
 gem 'graphiql-rails', group: :development
+
+ruby '2.5.0'
