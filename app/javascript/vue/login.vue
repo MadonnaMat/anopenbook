@@ -4,7 +4,7 @@
       b-nav-item(@click="signOut") 
         span(v-t="'login.logout'")
     b-navbar-nav
-      b-nav-item
+      b-nav-item(:href='linkEdit')
         img(:src="avatar")
   b-navbar-nav(v-else)
     b-nav-item-dropdown(right)
@@ -52,7 +52,14 @@ export default {
       return this.$t('login.password');
     },
   },
-  props: ['Login', 'SignUp', 'SignOut', 'ForgotPassword', 'ConfirmationResend']
+  props: [
+    'Login',
+    'SignUp',
+    'SignOut',
+    'ForgotPassword',
+    'ConfirmationResend',
+    'Edit',
+  ]
     .map(p => `link${p}`)
     .concat(['user']),
   methods: {
@@ -62,7 +69,7 @@ export default {
       this.axios
         .post(this.linkLogin, {user: this.$data})
         .then(resp => {
-          this.$notify({text: 'test', type: 'success'});
+          this.$notify({text: this.$t('login.success'), type: 'success'});
           this.username = resp.data.username;
           this.axios
             .get('/token')
@@ -85,7 +92,7 @@ export default {
     signOut() {
       this.axios.delete(this.linkSignOut).then(() => {
         this.username = null;
-        this.$notify({text: 'test', type: 'success'});
+        this.$notify({text: this.$t('login.logout_success'), type: 'success'});
         this.axios
           .get('/token')
           .then(res =>
