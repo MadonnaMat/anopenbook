@@ -1,25 +1,33 @@
 <template lang="pug">
   b-navbar(v-if="username")
     b-navbar-nav.mr-2
-      b-nav-item(@click="signOut") Log Out
+      b-nav-item(@click="signOut") 
+        span(v-t="'login.logout'")
     b-navbar-nav
       b-nav-item
         img(:src="avatar")
   b-navbar-nav(v-else)
-    b-nav-item-dropdown(right, text="Login")
+    b-nav-item-dropdown(right)
+      template(slot="button-content")
+        span(v-t="'login.login'")
       .dropdown-item.login-dropdown.w-auto
         b-form(@submit="onSubmit")
-          b-form-group(label="Email", label-for="login-email")
+          b-form-group(:label="tEmail", label-for="login-email")
             b-form-input(id="login-email", type="email", v-model="email", required, placeholder="Enter Email")
-          b-form-group(label="Password", label-for="login-password")
+          b-form-group(:label="tPassword", label-for="login-password")
             b-form-input(id="login-password", type="password", v-model="password", required, placeholder="Enter Password")
           b-form-group
-            b-form-checkbox(v-model="remember_me") Remember Me
-          b-button(type="submit") Submit
+            b-form-checkbox(v-model="remember_me")
+              span(v-t="'login.remember_me'")
+          b-button(type="submit")
+            span(v-t="'buttons.submit'")
       b-dropdown-divider
-      b-dropdown-item(:href='linkSignUp') Sign Up
-      b-dropdown-item(:href='linkForgotPassword') Forgot your password?
-      b-dropdown-item(:href='linkConfirmationResend') Didn't receive confirmation instructions?
+      b-dropdown-item(:href='linkSignUp')
+        span(v-t="'login.sign_up'")
+      b-dropdown-item(:href='linkForgotPassword') 
+        span(v-t="'login.forgot_pw'")
+      b-dropdown-item(:href='linkConfirmationResend')
+        span(v-t="'login.conf_resend'")
 </template>
 
 <script>
@@ -36,6 +44,12 @@ export default {
   computed: {
     avatar() {
       return `https://api.adorable.io/avatars/55/${this.username}`;
+    },
+    tEmail() {
+      return this.$t('login.email');
+    },
+    tPassword() {
+      return this.$t('login.password');
     },
   },
   props: ['Login', 'SignUp', 'SignOut', 'ForgotPassword', 'ConfirmationResend']
