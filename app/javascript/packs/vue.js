@@ -13,6 +13,7 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import App from 'vue/app.vue';
 import Login from 'vue/login.vue';
+import Sendnotification from 'vue/sendnotification.vue';
 
 Vue.use(TurbolinksAdapter);
 Vue.use(BootstrapVue);
@@ -22,9 +23,7 @@ Vue.use(VueI18n);
 
 document.addEventListener('turbolinks:load', () => {
   const messages = {
-    en: JSON.parse(
-      document.querySelector('meta[name=vue-translations]').content || '',
-    ),
+    en: require('js-yaml-loader!../../../config/locales/vue.en.yml').en.vue,
   };
 
   const i18n = new VueI18n({
@@ -46,6 +45,6 @@ document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
     i18n,
     el: '#app',
-    components: {App, Login},
+    components: {App, Login, Sendnotification},
   });
 });

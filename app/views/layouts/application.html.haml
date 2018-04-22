@@ -11,10 +11,10 @@
 
     = javascript_pack_tag 'vue'
     = stylesheet_pack_tag 'vue'
-    %meta{name: 'vue-translations', content: I18n.t('vue.').to_json}
   %body
     #app
+      %sendnotification{flashes: flash.to_json}
       = render partial: 'header'
       .container-fluid
         = yield
-      %notifications{position: "bottom right", classes: 'styled-notification'}
+      %notifications{position: "bottom right", classes: 'styled-notification', width: '500px'}

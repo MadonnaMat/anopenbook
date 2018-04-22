@@ -55,6 +55,7 @@ group :development do
   gem 'rails-erd'
   gem 'pry-rails'
   gem 'i18n_generators'
+  gem "letter_opener"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -71,5 +72,6 @@ gem 'fast_jsonapi'
 gem 'graphql'
 
 gem 'graphiql-rails', group: :development
+gem 'sendgrid-ruby'
 
 ruby '2.5.0'

@@ -10,4 +10,6 @@ en:
       remember_me: "Keep Me Signed In"
       sign_up: "Create an Account"
       forgot_pw: "Forgot Your Password?"
-      conf_resend: " Didn't Receive Confirmation Instructions?"
+      conf_resend: "Didn't Receive Confirmation Instructions?"
+      success: "Signed in successfully."
+      logout_success: "Signed out successfully."
