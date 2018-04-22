@@ -1,8 +1,8 @@
 %nav.navbar.navbar-expand-lg.navbar-light.bg-light.border-bottom
-  = link_to root_path, class: 'navbar-brand' do
+  = link_to root_path, class: 'navbar-brand ml-4' do
     %span.h1 AnOpenBook
   .navbar-nav.mr-auto
-  %login{link: {login: user_session_path,
+  %login.mr-4{link: {login: user_session_path,
                 sign_up: new_user_registration_path,
                 forgot_password: new_user_password_path,
                 confirmation_resend: new_user_confirmation_path,

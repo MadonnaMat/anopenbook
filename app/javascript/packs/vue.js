@@ -8,6 +8,7 @@ import TurbolinksAdapter from 'vue-turbolinks';
 import Vue from 'vue/dist/vue.esm';
 import BootstrapVue from 'bootstrap-vue';
 import Notifications from 'vue-notification';
+import VueI18n from 'vue-i18n';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import App from 'vue/app.vue';
@@ -17,8 +18,20 @@ Vue.use(TurbolinksAdapter);
 Vue.use(BootstrapVue);
 Vue.use(Notifications);
 Vue.use(VueAxios, axios);
+Vue.use(VueI18n);
 
 document.addEventListener('turbolinks:load', () => {
+  const messages = {
+    en: JSON.parse(
+      document.querySelector('meta[name=vue-translations]').content || '',
+    ),
+  };
+
+  const i18n = new VueI18n({
+    locale: 'en', // set locale
+    messages, // set locale messages
+  });
+
   axios.interceptors.request.use(function(config) {
     config.headers = {
       'X-CSRF-Token': document.querySelector('meta[name=csrf-token]').content,
@@ -29,11 +42,10 @@ document.addEventListener('turbolinks:load', () => {
     };
     return config;
   });
+
   const app = new Vue({
+    i18n,
     el: '#app',
-    data: {
-      message: 'Can you say hello?',
-    },
     components: {App, Login},
   });
 });

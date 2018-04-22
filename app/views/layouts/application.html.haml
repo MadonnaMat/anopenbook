@@ -11,6 +11,7 @@
 
     = javascript_pack_tag 'vue'
     = stylesheet_pack_tag 'vue'
+    %meta{name: 'vue-translations', content: I18n.t('vue.').to_json}
   %body
     #app
       = render partial: 'header'

@@ -1,0 +1,249 @@
+en:
+  activerecord:
+    models:
+      acts_as_votable/vote: Acts as votable/vote  #g
+      book: Book  #g
+      chapter: Chapter  #g
+      cover_art: Cover art  #g
+      edit: Edit  #g
+      friendly_id/slug: Friendly id/slug  #g
+      habtm_books: Habtm books  #g
+      habtm_users: Habtm users  #g
+      order: Order  #g
+      paper_trail/version: Paper trail/version  #g
+      submission: Submission  #g
+      synopsis: Synopsis  #g
+      title: Title  #g
+      user: User  #g
+
+    attributes:
+      acts_as_votable/vote:
+        votable: :activerecord.models.votable  #g
+        votable_type: Votable type  #g
+        vote_flag: Vote flag  #g
+        vote_scope: Vote scope  #g
+        vote_weight: Vote weight  #g
+        voter: :activerecord.models.voter  #g
+        voter_type: Voter type  #g
+
+      book:
+        cover_attachment: :activerecord.models.cover_attachment  #g
+        cover_blob: :activerecord.models.cover_blob  #g
+        current_step: Current step  #g
+        current_step_ends_at: Current step ends at  #g
+        genre: Genre  #g
+        slug: Slug  #g
+        slugs: Slugs  #g
+        submissons: Submissons  #g
+        title: Title  #g
+        users: Users  #g
+
+      chapter:
+        body: Body  #g
+        book: :activerecord.models.book  #g
+        cached_votes_down: Cached votes down  #g
+        cached_votes_score: Cached votes score  #g
+        cached_votes_total: Cached votes total  #g
+        cached_votes_up: Cached votes up  #g
+        cached_weighted_average: Cached weighted average  #g
+        cached_weighted_score: Cached weighted score  #g
+        cached_weighted_total: Cached weighted total  #g
+        current_step: Current step  #g
+        final_chapter: Final chapter  #g
+        in_conflict: In conflict  #g
+        is_frozen: Is frozen  #g
+        is_included: Is included  #g
+        is_submitted: Is submitted  #g
+        parent: :activerecord.models.parent  #g
+        parent_version: Parent version  #g
+        slug: Slug  #g
+        slugs: Slugs  #g
+        title: Title  #g
+        user: :activerecord.models.user  #g
+        versions: Versions  #g
+        votes_for: Votes for  #g
+        voting_enabled: Voting enabled  #g
+
+      cover_art:
+        body: Body  #g
+        book: :activerecord.models.book  #g
+        cached_votes_down: Cached votes down  #g
+        cached_votes_score: Cached votes score  #g
+        cached_votes_total: Cached votes total  #g
+        cached_votes_up: Cached votes up  #g
+        cached_weighted_average: Cached weighted average  #g
+        cached_weighted_score: Cached weighted score  #g
+        cached_weighted_total: Cached weighted total  #g
+        current_step: Current step  #g
+        final_chapter: Final chapter  #g
+        in_conflict: In conflict  #g
+        is_frozen: Is frozen  #g
+        is_included: Is included  #g
+        is_submitted: Is submitted  #g
+        parent: :activerecord.models.parent  #g
+        parent_version: Parent version  #g
+        slug: Slug  #g
+        slugs: Slugs  #g
+        title: Title  #g
+        user: :activerecord.models.user  #g
+        versions: Versions  #g
+        votes_for: Votes for  #g
+        voting_enabled: Voting enabled  #g
+
+      edit:
+        body: Body  #g
+        book: :activerecord.models.book  #g
+        cached_votes_down: Cached votes down  #g
+        cached_votes_score: Cached votes score  #g
+        cached_votes_total: Cached votes total  #g
+        cached_votes_up: Cached votes up  #g
+        cached_weighted_average: Cached weighted average  #g
+        cached_weighted_score: Cached weighted score  #g
+        cached_weighted_total: Cached weighted total  #g
+        current_step: Current step  #g
+        final_chapter: Final chapter  #g
+        in_conflict: In conflict  #g
+        is_frozen: Is frozen  #g
+        is_included: Is included  #g
+        is_submitted: Is submitted  #g
+        parent: :activerecord.models.parent  #g
+        parent_version: Parent version  #g
+        slug: Slug  #g
+        slugs: Slugs  #g
+        title: Title  #g
+        user: :activerecord.models.user  #g
+        versions: Versions  #g
+        votes_for: Votes for  #g
+        voting_enabled: Voting enabled  #g
+
+      friendly_id/slug:
+        scope: Scope  #g
+        slug: Slug  #g
+        sluggable: :activerecord.models.sluggable  #g
+        sluggable_type: Sluggable type  #g
+
+      habtm_books:
+        book: :activerecord.models.book  #g
+        left_side: :activerecord.models.left_side  #g
+
+      habtm_users:
+        left_side: :activerecord.models.left_side  #g
+        user: :activerecord.models.user  #g
+
+      order:
+        book: :activerecord.models.book  #g
+        price: Price  #g
+        status: Status  #g
+        user: :activerecord.models.user  #g
+
+      paper_trail/version:
+        event: Event  #g
+        item: :activerecord.models.item  #g
+        item_type: Item type  #g
+        object: Object  #g
+        whodunnit: Whodunnit  #g
+
+      submission:
+        body: Body  #g
+        book: :activerecord.models.book  #g
+        cached_votes_down: Cached votes down  #g
+        cached_votes_score: Cached votes score  #g
+        cached_votes_total: Cached votes total  #g
+        cached_votes_up: Cached votes up  #g
+        cached_weighted_average: Cached weighted average  #g
+        cached_weighted_score: Cached weighted score  #g
+        cached_weighted_total: Cached weighted total  #g
+        current_step: Current step  #g
+        final_chapter: Final chapter  #g
+        in_conflict: In conflict  #g
+        is_frozen: Is frozen  #g
+        is_included: Is included  #g
+        is_submitted: Is submitted  #g
+        parent: :activerecord.models.parent  #g
+        parent_version: Parent version  #g
+        slug: Slug  #g
+        slugs: Slugs  #g
+        title: Title  #g
+        user: :activerecord.models.user  #g
+        versions: Versions  #g
+        votes_for: Votes for  #g
+        voting_enabled: Voting enabled  #g
+
+      synopsis:
+        body: Body  #g
+        book: :activerecord.models.book  #g
+        cached_votes_down: Cached votes down  #g
+        cached_votes_score: Cached votes score  #g
+        cached_votes_total: Cached votes total  #g
+        cached_votes_up: Cached votes up  #g
+        cached_weighted_average: Cached weighted average  #g
+        cached_weighted_score: Cached weighted score  #g
+        cached_weighted_total: Cached weighted total  #g
+        current_step: Current step  #g
+        final_chapter: Final chapter  #g
+        in_conflict: In conflict  #g
+        is_frozen: Is frozen  #g
+        is_included: Is included  #g
+        is_submitted: Is submitted  #g
+        parent: :activerecord.models.parent  #g
+        parent_version: Parent version  #g
+        slug: Slug  #g
+        slugs: Slugs  #g
+        title: Title  #g
+        user: :activerecord.models.user  #g
+        versions: Versions  #g
+        votes_for: Votes for  #g
+        voting_enabled: Voting enabled  #g
+
+      title:
+        body: Body  #g
+        book: :activerecord.models.book  #g
+        cached_votes_down: Cached votes down  #g
+        cached_votes_score: Cached votes score  #g
+        cached_votes_total: Cached votes total  #g
+        cached_votes_up: Cached votes up  #g
+        cached_weighted_average: Cached weighted average  #g
+        cached_weighted_score: Cached weighted score  #g
+        cached_weighted_total: Cached weighted total  #g
+        current_step: Current step  #g
+        final_chapter: Final chapter  #g
+        in_conflict: In conflict  #g
+        is_frozen: Is frozen  #g
+        is_included: Is included  #g
+        is_submitted: Is submitted  #g
+        parent: :activerecord.models.parent  #g
+        parent_version: Parent version  #g
+        slug: Slug  #g
+        slugs: Slugs  #g
+        title: Title  #g
+        user: :activerecord.models.user  #g
+        versions: Versions  #g
+        votes_for: Votes for  #g
+        voting_enabled: Voting enabled  #g
+
+      user:
+        available_earnings: Available earnings  #g
+        avatar_attachment: :activerecord.models.avatar_attachment  #g
+        avatar_blob: :activerecord.models.avatar_blob  #g
+        books: Books  #g
+        confirmation_sent_at: Confirmation sent at  #g
+        confirmation_token: Confirmation token  #g
+        confirmed_at: Confirmed at  #g
+        current_sign_in_at: Current sign in at  #g
+        current_sign_in_ip: Current sign in ip  #g
+        email: Email  #g
+        encrypted_password: Encrypted password  #g
+        favorite_genres: Favorite genres  #g
+        fullname: Fullname  #g
+        last_sign_in_at: Last sign in at  #g
+        last_sign_in_ip: Last sign in ip  #g
+        remember_created_at: Remember created at  #g
+        reset_password_sent_at: Reset password sent at  #g
+        reset_password_token: Reset password token  #g
+        slug: Slug  #g
+        slugs: Slugs  #g
+        submissions: Submissions  #g
+        total_earnings: Total earnings  #g
+        unconfirmed_email: Unconfirmed email  #g
+        use_real_name: Use real name  #g
+        username: Username  #g
