@@ -1,5 +1,11 @@
 <template lang="pug">
-  b-navbar-nav
+  b-navbar(v-if="username")
+    b-navbar-nav.mr-2
+      b-nav-item(@click="signOut") Log Out
+    b-navbar-nav
+      b-nav-item
+        img(:src="avatar")
+  b-navbar-nav(v-else)
     b-nav-item-dropdown(right, text="Login")
       .dropdown-item.login-dropdown.w-auto
         b-form(@submit="onSubmit")
@@ -17,24 +23,39 @@
 </template>
 
 <script>
+import $ from 'jquery';
 export default {
   data() {
     return {
       email: '',
       password: '',
       remember_me: false,
+      username: this.user,
     };
   },
-  props: ['Login', 'SignUp', 'ForgotPassword', 'ConfirmationResend'].map(
-    p => `link${p}`,
-  ),
+  computed: {
+    avatar() {
+      return `https://api.adorable.io/avatars/55/${this.username}`;
+    },
+  },
+  props: ['Login', 'SignUp', 'SignOut', 'ForgotPassword', 'ConfirmationResend']
+    .map(p => `link${p}`)
+    .concat(['user']),
   methods: {
     onSubmit(e) {
       e.preventDefault();
 
       this.axios
         .post(this.linkLogin, {user: this.$data})
-        .then(() => this.$notify({text: 'test', type: 'success'}))
+        .then(resp => {
+          this.$notify({text: 'test', type: 'success'});
+          this.username = resp.data.username;
+          this.axios
+            .get('/token')
+            .then(res =>
+              $('meta[name="csrf-token"]').attr('content', res.data.token),
+            );
+        })
         .catch(error => {
           let errorText = 'Unkown error trying to login';
           if (error.response && error.response.data.error) {
@@ -46,6 +67,17 @@ export default {
             type: 'error',
           });
         });
+    },
+    signOut() {
+      this.axios.delete(this.linkSignOut).then(() => {
+        this.username = null;
+        this.$notify({text: 'test', type: 'success'});
+        this.axios
+          .get('/token')
+          .then(res =>
+            $('meta[name="csrf-token"]').attr('content', res.data.token),
+          );
+      });
     },
   },
 };
