@@ -10,9 +10,10 @@ one:
   current_step: 1
   final_chapter: false
   is_included: false
-  frozen: false
+  is_frozen: false
   is_submitted: false
   in_conflict: false
+  slug: my-string
   user: one
   book: one
 
@@ -26,8 +27,9 @@ two:
   current_step: 1
   final_chapter: false
   is_included: false
-  frozen: false
+  is_frozen: false
   is_submitted: false
   in_conflict: false
+  slug: my-string-1
   user: two
   book: two

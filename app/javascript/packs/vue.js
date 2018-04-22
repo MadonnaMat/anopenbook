@@ -19,12 +19,16 @@ Vue.use(Notifications);
 Vue.use(VueAxios, axios);
 
 document.addEventListener('turbolinks:load', () => {
-  axios.defaults.headers.common['X-CSRF-Token'] = document.querySelector(
-    'meta[name=csrf-token]',
-  ).content;
-  axios.defaults.headers.common['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
-  axios.defaults.headers.common['Accept'] = 'application/json';
-  axios.defaults.headers.common['Content-Type'] = 'application/json';
+  axios.interceptors.request.use(function(config) {
+    config.headers = {
+      'X-CSRF-Token': document.querySelector('meta[name=csrf-token]').content,
+
+      HTTP_X_REQUESTED_WITH: 'XMLHttpRequest',
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    };
+    return config;
+  });
   const app = new Vue({
     el: '#app',
     data: {
