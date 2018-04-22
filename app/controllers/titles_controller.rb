@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class TitlesController < ApplicationController
-  before_action :set_title, only: [:show, :edit, :update, :destroy]
+  before_action :set_title, only: %i[show edit update destroy]
 
   # GET /titles
   # GET /titles.json
@@ -9,8 +11,7 @@ class TitlesController < ApplicationController
 
   # GET /titles/1
   # GET /titles/1.json
-  def show
-  end
+  def show; end
 
   # GET /titles/new
   def new
@@ -18,8 +19,7 @@ class TitlesController < ApplicationController
   end
 
   # GET /titles/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /titles
   # POST /titles.json
@@ -62,13 +62,14 @@ class TitlesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_title
-      @title = Title.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def title_params
-      params.fetch(:title, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_title
+    @title = Title.friendly.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def title_params
+    params.fetch(:title, {})
+  end
 end
