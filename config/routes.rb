@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   post '/graphql', to: 'graphql#execute'
   resources :books
 
-  devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'user/sessions'
+  }
   resources :edits
   resources :titles
   resources :cover_arts

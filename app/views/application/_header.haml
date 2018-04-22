@@ -2,5 +2,7 @@
   = link_to root_path, class: 'navbar-brand' do
     %span.h1 AnOpenBook
   .navbar-nav.mr-auto
-  .navbar-nav
-    = link_to 'login', new_user_session_path, class: 'nav-link'
+  %login{link: {login: user_session_path,
+                sign_up: new_user_registration_path,
+                forgot_password: new_user_password_path,
+                confirmation_resend: new_user_confirmation_path}}

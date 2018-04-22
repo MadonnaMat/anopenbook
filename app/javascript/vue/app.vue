@@ -1,5 +1,5 @@
 <template lang="pug">
-  b-container-fluid.test
+  b-container.test(fluid)
     b-row
       b-col
         h1 Welcome
