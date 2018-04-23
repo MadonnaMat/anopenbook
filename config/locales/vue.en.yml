@@ -13,3 +13,18 @@ en:
       conf_resend: "Didn't Receive Confirmation Instructions?"
       success: "Signed in successfully."
       logout_success: "Signed out successfully."
+    book_carousel:
+      manuscript:
+        title: Manuscripts
+      most_read:
+        title: Most Read
+      romance:
+        title: Romance
+      crime:
+        title: Crime
+      science_fiction:
+        title: Science Fiction
+      fantasy:
+        title: Fantasy
+      horror:
+        title: Horror

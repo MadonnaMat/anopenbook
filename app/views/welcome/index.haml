@@ -1,1 +1,4 @@
-%app
+%bookcarousel{type: 'manuscript'}
+%bookcarousel{type: 'most_read'}
+- Book.genres.keys.each do |genre|
+  %bookcarousel{type: genre}

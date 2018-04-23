@@ -14,6 +14,7 @@ import VueAxios from 'vue-axios';
 import App from 'vue/app.vue';
 import Login from 'vue/login.vue';
 import Sendnotification from 'vue/sendnotification.vue';
+import Bookcarousel from 'vue/bookcarousel.vue';
 
 Vue.use(TurbolinksAdapter);
 Vue.use(BootstrapVue);
@@ -45,6 +46,6 @@ document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
     i18n,
     el: '#app',
-    components: {App, Login, Sendnotification},
+    components: {App, Login, Sendnotification, Bookcarousel},
   });
 });
