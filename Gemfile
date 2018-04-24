@@ -73,5 +73,6 @@ gem 'graphql'
 
 gem 'graphiql-rails', group: :development
 gem 'sendgrid-ruby'
+gem 'kaminari'
 
 ruby '2.5.0'
