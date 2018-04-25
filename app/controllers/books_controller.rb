@@ -7,6 +7,12 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @books = Book.all
+    select_books
+    paginate_books
+    respond_to do |format|
+      format.html
+      format.json { render json: { last: @books.last_page?, books: @books } }
+    end
   end
 
   # GET /books/1
@@ -71,5 +77,20 @@ class BooksController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def book_params
     params.require(:book).permit(:genre, :title, :current_step, :current_step_ends_at, :read_count, :slug)
+  end
+
+  def select_books
+    @books = case params[:type]
+             when 'manuscript'
+               @books.manuscrips
+             when 'most_read'
+               @books.completes
+             else
+               @books.where(genre: params[:type])
+             end
+  end
+
+  def paginate_books
+    @books = @books.page(params[:page]).per(4) if params[:page]
   end
 end

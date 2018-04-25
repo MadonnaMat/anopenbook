@@ -35,12 +35,15 @@ export default {
           },
         ],
       },
+      page: 2,
+      onPage: 0,
+      onBook: 0,
       books: JSON.parse(this.first_pages || '[]'),
       complete: this.init_complete,
       moving: false,
     };
   },
-  props: ['type', 'first_pages', 'init_complete'],
+  props: ['type', 'first_pages', 'init_complete', 'linkGet'],
   components: {Slick, Bookitem},
   computed: {
     randomSrc() {
@@ -58,11 +61,46 @@ export default {
     },
   },
   methods: {
-    handleBeforeChange() {
+    handleBeforeChange(e, s, currBook, nextBook) {
+      this.onBook = nextBook;
       this.moving = true;
     },
     handleAfterChange() {
+      this.checkAjax();
       this.moving = false;
+    },
+    checkAjax() {
+      if (this.linkGet && !this.complete) {
+        let nextAjax = this.onPage * 4 + 2;
+        if (nextAjax == this.onBook) {
+          if (this.page <= this.onPage + 2) {
+            this.axios
+              .get(this.linkGet, {
+                params: {
+                  page: this.page,
+                  type: this.type,
+                },
+              })
+              .then(({data}) => {
+                let {books, last} = data;
+                this.complete = last;
+                this.$refs.slick.destroy();
+                this.page += 1;
+                this.books = this.books.concat(books);
+                this.$nextTick(() => {
+                  this.$refs.slick.create();
+                  this.$nextTick(() =>
+                    this.$refs.slick.goTo(this.onBook, true),
+                  );
+                });
+              });
+          }
+        } else {
+          if (this.onBook % 4 == 0) {
+            this.onPage = this.onBook / 4;
+          }
+        }
+      }
     },
   },
 };

@@ -14,6 +14,11 @@ class Book < ApplicationRecord
 
   before_save :ensure_cover
 
+  default_scope do
+    order("current_step = #{Book.current_steps[:complete]}")
+      .order(read_count: :desc)
+  end
+
   scope :manuscripts,
         lambda {
           where.not(current_step: Book.current_steps[:complete])
@@ -37,7 +42,13 @@ class Book < ApplicationRecord
   end
 
   def cover_path
-    Rails.application.routes.url_helpers.polymorphic_url(cover, only_path: true) if cover.attached?
+    if cover.attached?
+      Rails.application.routes.url_helpers.polymorphic_url(cover.variant(resize: '102x156'), only_path: true)
+    end
+  end
+
+  def as_json(_args)
+    super(methods: %i[cover_path show_path])
   end
 
   private
@@ -54,14 +65,14 @@ class Book < ApplicationRecord
       i.gravity 'North'
       i.geometry '+200 +100'
       i.pointsize '36'
-      i.caption '\\nNew Manuscript'
+      i.caption "\\n#{title}"
       i.composite img_loc.path
     end
 
     img_loc.rewind
 
     cover.attach(io: img_loc,
-                 filename: 'new_manuscript.png',
+                 filename: "#{title.parameterize.underscore}.png",
                  content_type: 'image/png')
 
     img_loc.close
