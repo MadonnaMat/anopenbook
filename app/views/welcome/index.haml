@@ -1,6 +1,11 @@
 %bookcarousel{type: 'manuscript',
-  first_pages: @manuscripts.to_json(methods: [:cover_path, :show_path]),
+  first_pages: @manuscripts.to_json,
   init_complete: @manuscripts_complete }
-%bookcarousel{type: 'most_read'}
-- Book.genres.keys.each do |genre|
-  %bookcarousel{type: genre}
+%bookcarousel{type: 'most_read',
+  first_pages: @most_reads.to_json,
+  init_complete: @most_reads_complete,
+  'link-get': books_path}
+- @genres.each do |genre, books_read|
+  - books, is_read = books_read
+  %bookcarousel{type: genre, first_pages: books.to_json,
+                init_complete: is_read, 'link-get': books_path}

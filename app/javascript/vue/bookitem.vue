@@ -27,10 +27,19 @@ export default {
 
 <style lang="scss" scoped>
 article {
-  max-width: 12rem;
+  width: 12rem;
+  min-height: 20rem;
+  .card-title {
+    font-size: 20px;
+    font-size: 1.25rem;
+  }
   img {
     border: 1px solid #343a40;
     border-right-width: 3px;
+    height: 156px;
+    width: 102px;
+    margin: auto;
+    margin-top: 15px;
   }
 }
 </style>
