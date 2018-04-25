@@ -74,5 +74,7 @@ gem 'graphql'
 gem 'graphiql-rails', group: :development
 gem 'sendgrid-ruby'
 gem 'kaminari'
+gem 'cloudinary', require: false
+gem 'activestorage-cloudinary-service'
 
 ruby '2.5.0'
