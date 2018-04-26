@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Submission < ApplicationRecord
   extend FriendlyId
   include CurrentStep
@@ -10,6 +12,9 @@ class Submission < ApplicationRecord
   belongs_to :user
   belongs_to :book
   belongs_to :parent, class_name: 'Submission', required: false
+
+  scope :synopses, -> { where(type: 'Synopses') }
+  scope :includeds, -> { where(is_included: true) }
 
   def slug_canidates
     [

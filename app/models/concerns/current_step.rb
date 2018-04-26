@@ -32,8 +32,8 @@ module CurrentStep
                    unless c == 'chapter' && c_num && c_step && c_num = c_num.to_i
                      raise 'Invalid Key'
                    end
-                   c_num += 8
-                   c_num -= 1 unless c_step == 'voting'
+                   c_num = (c_num - 1) * 2 + 8
+                   c_num += 1 unless c_step == 'submission'
                    c_num
                  end
       super(new_step)

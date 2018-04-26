@@ -3,6 +3,7 @@
 class Book < ApplicationRecord
   extend FriendlyId
   include CurrentStep
+  include Rails.application.routes.url_helpers
 
   enum genre: %i[romance crime science_fiction fantasy horror]
 
@@ -15,7 +16,7 @@ class Book < ApplicationRecord
   before_save :ensure_cover
 
   default_scope do
-    order("current_step = #{Book.current_steps[:complete]}")
+    ordering { current_step == Book.current_steps[:complete] }
       .order(read_count: :desc)
   end
 
@@ -30,6 +31,33 @@ class Book < ApplicationRecord
                                Book.current_steps[:complete])
                     }
 
+  def synopses
+    submissions.synopses
+  end
+
+  def included_synopses
+    synopses.includeds.first
+  end
+
+  def previous_step_winner
+    false
+  end
+
+  def is_manuscript?
+    current_step != :complete
+  end
+
+  def transition_and_translation
+    type, step, chapter = type_step_chapter
+
+    in_type = type == 'chapter' ? I18n.t('book.submission.chapter', ch: chapter) : I18n.t("book.submission.#{type}")
+    if step == 'submission'
+      [I18n.t('book.submission_step', type: in_type), url_for_steps(type, chapter)]
+    else
+      [I18n.t('book.voting_step', type: in_type), url_for_steps(type, chapter)]
+    end
+  end
+
   def slug_canidates
     [
       :title,
@@ -38,13 +66,11 @@ class Book < ApplicationRecord
   end
 
   def show_path
-    Rails.application.routes.url_helpers.polymorphic_url(self, only_path: true)
+    polymorphic_url(self, only_path: true)
   end
 
   def cover_path
-    if cover.attached?
-      Rails.application.routes.url_helpers.polymorphic_url(cover.variant(resize: '102x156'), only_path: true)
-    end
+    polymorphic_url(cover.variant(resize: '102x156'), only_path: true) if cover.attached?
   end
 
   def as_json(_args)
@@ -52,6 +78,18 @@ class Book < ApplicationRecord
   end
 
   private
+
+  def type_step_chapter
+    type, chapter, step = current_step.to_s.split('_')
+    step ||= chapter
+    type = "#{type}_#{chapter}" if chapter == 'art'
+    chapter = nil unless type == 'chapter'
+    [type, step, chapter]
+  end
+
+  def url_for_steps(type, chapter)
+    url_for(controller: type.pluralize, action: 'index', book_id: friendly_id, chapter: chapter, only_path: true)
+  end
 
   def ensure_cover
     return if cover.attached?
