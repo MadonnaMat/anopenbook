@@ -53,7 +53,9 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rails-erd'
+  gem 'pry'
   gem 'pry-rails'
+  gem 'pry-byebug'
   gem 'i18n_generators'
   gem "letter_opener"
 end
@@ -76,5 +78,6 @@ gem 'sendgrid-ruby'
 gem 'kaminari'
 gem 'cloudinary', require: false
 gem 'activestorage-cloudinary-service'
+gem 'baby_squeel'
 
 ruby '2.5.0'

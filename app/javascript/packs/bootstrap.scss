@@ -33,3 +33,12 @@ $slick-arrow-color: black !default;
     border-left-color: #42a85f;
   }
 }
+
+.cover_div {
+  padding: 5%;
+
+  img {
+    border: 1px solid #343a40;
+    border-right-width: 3px;
+  }
+}

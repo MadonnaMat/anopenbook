@@ -15,6 +15,7 @@ import App from 'vue/app.vue';
 import Login from 'vue/login.vue';
 import Sendnotification from 'vue/sendnotification.vue';
 import Bookcarousel from 'vue/bookcarousel.vue';
+import VueCountdown from '@xkeshi/vue-countdown';
 
 Vue.use(TurbolinksAdapter);
 Vue.use(BootstrapVue);
@@ -46,6 +47,6 @@ document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
     i18n,
     el: '#app',
-    components: {App, Login, Sendnotification, Bookcarousel},
+    components: {App, Login, Sendnotification, Bookcarousel, VueCountdown},
   });
 });
