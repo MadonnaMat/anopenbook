@@ -1,4 +1,4 @@
-= form_for @synopsis do |f|
+= form_for [@book, @synopsis] do |f|
   - if @synopsis.errors.any?
     #error_explanation
       %h2= "#{pluralize(@synopsis.errors.count, "error")} prohibited this synopsis from being saved:"

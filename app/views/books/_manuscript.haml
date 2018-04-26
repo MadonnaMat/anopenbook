@@ -4,10 +4,4 @@
 %h4= link_to(text, url)
 %h5 #{t('book.time_to_submit')}
 %h4
-  %vue-countdown{':time' => (book.current_step_ends_at - Time.now) * 1000}
-    %template{'slot-scope': "props"} 
-      #{t('datetime.distance_in_words.x_days', count: '{{ props.days }}')} 
-      #{t('datetime.distance_in_words.x_hours', count: '{{ props.hours }}')} 
-      #{t('datetime.distance_in_words.x_minutes', count: '{{ props.minutes }}')} 
-      #{t('datetime.distance_in_words.x_seconds', count: '{{ props.seconds }}')}
-
+  = render partial: 'countdown', locals: {book: book}

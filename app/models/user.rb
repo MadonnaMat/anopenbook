@@ -16,4 +16,10 @@ class User < ApplicationRecord
   has_and_belongs_to_many :books
   has_one_attached :avatar
   has_many :submissions
+
+  def from_json(on_page: nil)
+    json = as_json
+    json[:on_page] = on_page if on_page
+    json
+  end
 end

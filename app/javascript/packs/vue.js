@@ -11,11 +11,12 @@ import Notifications from 'vue-notification';
 import VueI18n from 'vue-i18n';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import VueCountdown from '@xkeshi/vue-countdown';
 import App from 'vue/app.vue';
 import Login from 'vue/login.vue';
 import Sendnotification from 'vue/sendnotification.vue';
 import Bookcarousel from 'vue/bookcarousel.vue';
-import VueCountdown from '@xkeshi/vue-countdown';
+import Submitbutton from 'vue/submitbutton.vue';
 
 Vue.use(TurbolinksAdapter);
 Vue.use(BootstrapVue);
@@ -47,6 +48,28 @@ document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
     i18n,
     el: '#app',
-    components: {App, Login, Sendnotification, Bookcarousel, VueCountdown},
+    data() {
+      return {
+        loggedIn: false,
+        onPage: null,
+      };
+    },
+    components: {
+      App,
+      Login,
+      Sendnotification,
+      Bookcarousel,
+      VueCountdown,
+      Submitbutton,
+    },
+    mounted() {
+      let onPage = this.$el.attributes['on-page'];
+      this.onPage = onPage ? onPage.value : null;
+    },
+    methods: {
+      setLoggedIn(loggedIn) {
+        this.loggedIn = loggedIn;
+      },
+    },
   });
 });
