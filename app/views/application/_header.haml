@@ -8,4 +8,6 @@
                 confirmation_resend: new_user_confirmation_path,
                 sign_out: destroy_user_session_path,
                 edit: edit_user_registration_path},
-         user: current_user.try(:username)}
+         user: current_user.try(:username),
+         "@loggedin": "setLoggedIn",
+         ":on-page": "onPage"}

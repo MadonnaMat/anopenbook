@@ -32,6 +32,7 @@
 
 <script>
 import $ from 'jquery';
+import linkArray from './link_array';
 export default {
   data() {
     return {
@@ -52,30 +53,30 @@ export default {
       return this.$t('login.password');
     },
   },
-  props: [
-    'Login',
-    'SignUp',
-    'SignOut',
-    'ForgotPassword',
-    'ConfirmationResend',
-    'Edit',
-  ]
-    .map(p => `link${p}`)
-    .concat(['user']),
+  props: linkArray([
+    'login',
+    'sign_up',
+    'sign_out',
+    'forgot_password',
+    'confirmation_resend',
+    'edit',
+  ]).concat(['user', 'onPage']),
+  created() {
+    this.$emit('loggedin', !!this.username);
+  },
   methods: {
     onSubmit(e) {
       e.preventDefault();
 
       this.axios
-        .post(this.linkLogin, {user: this.$data})
+        .post(this.linkLogin, {user: this.$data, on_page: this.onPage})
         .then(resp => {
           this.$notify({text: this.$t('login.success'), type: 'success'});
           this.username = resp.data.username;
-          this.axios
-            .get('/token')
-            .then(res =>
-              $('meta[name="csrf-token"]').attr('content', res.data.token),
-            );
+          this.axios.get('/token').then(res => {
+            $('meta[name="csrf-token"]').attr('content', res.data.token);
+            this.$emit('loggedin', true);
+          });
         })
         .catch(error => {
           let errorText = 'Unkown error trying to login';
@@ -93,11 +94,10 @@ export default {
       this.axios.delete(this.linkSignOut).then(() => {
         this.username = null;
         this.$notify({text: this.$t('login.logout_success'), type: 'success'});
-        this.axios
-          .get('/token')
-          .then(res =>
-            $('meta[name="csrf-token"]').attr('content', res.data.token),
-          );
+        this.axios.get('/token').then(res => {
+          $('meta[name="csrf-token"]').attr('content', res.data.token);
+          this.$emit('loggedin', false);
+        });
       });
     },
   },

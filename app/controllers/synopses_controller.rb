@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 class SynopsesController < ApplicationController
-  before_action :set_synopsis, only: [:show, :edit, :update, :destroy]
+  before_action :set_book
+  before_action :set_synopsis, only: %i[show edit update destroy]
 
   # GET /synopses
   # GET /synopses.json
   def index
-    @synopses = Synopsis.all
+    @synopses = Synopsis.where(book_id: @book.id).all
   end
 
   # GET /synopses/1
   # GET /synopses/1.json
-  def show
-  end
+  def show; end
 
   # GET /synopses/new
   def new
@@ -18,8 +20,7 @@ class SynopsesController < ApplicationController
   end
 
   # GET /synopses/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /synopses
   # POST /synopses.json
@@ -62,13 +63,18 @@ class SynopsesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_synopsis
-      @synopsis = Synopsis.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def synopsis_params
-      params.fetch(:synopsis, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_synopsis
+    @synopsis = Synopsis.friendly.find(params[:id])
+  end
+
+  def set_book
+    @book = Book.friendly.find(params[:book_id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def synopsis_params
+    params.fetch(:synopsis, {})
+  end
 end

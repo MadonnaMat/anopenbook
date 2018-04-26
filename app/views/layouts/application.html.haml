@@ -12,7 +12,7 @@
     = javascript_pack_tag 'vue'
     = stylesheet_pack_tag 'vue'
   %body
-    #app
+    #app{"on-page": "#{controller_name}/#{action_name}"}
       %sendnotification{flashes: flash.to_json}
       = render partial: 'header'
       .container-fluid

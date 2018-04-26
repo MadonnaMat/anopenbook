@@ -7,7 +7,6 @@ export default {
   mounted() {
     let flashes = JSON.parse(this.flashes);
     this.$nextTick(() => {
-      console.log(this.$notifiy);
       flashes.forEach(flash => {
         let type = 'success';
         if (flash[0] == 'alert') {
