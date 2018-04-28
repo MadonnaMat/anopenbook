@@ -1,10 +1,19 @@
 = form_for [@book, @synopsis] do |f|
-  - if @synopsis.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@synopsis.errors.count, "error")} prohibited this synopsis from being saved:"
-      %ul
-        - @synopsis.errors.full_messages.each do |message|
-          %li= message
-
-  .actions
-    = f.submit 'Save'
+  .row.mt-5
+    .col-sm-12
+      .row
+        .col-auto.mr-auto
+          %h2= t('synopsis.write_your_synopsis')
+        .col-auto
+          = f.submit t('controls.save'), class: 'btn btn-secondary'
+          = f.submit t('controls.publish'), name: 'publish', class: 'btn btn-success'
+  .row
+    .col-auto.mr-auto
+      %h4= @book.genre.titleize
+      %h4
+        = f.label :title, t('synopsis.working_title')
+        = f.text_field :title, required: true
+  .row
+    .col-lg-12
+      %wysiwyg{"v-model": 'inputEcho'}
+      = f.hidden_field :body, 'v-model': 'inputEcho', class: 'input-echo', 'data-value': @synopsis.body

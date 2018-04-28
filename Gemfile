@@ -79,5 +79,6 @@ gem 'kaminari'
 gem 'cloudinary', require: false
 gem 'activestorage-cloudinary-service'
 gem 'baby_squeel'
+gem 'betterlorem'
 
 ruby '2.5.0'

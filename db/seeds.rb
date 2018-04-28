@@ -7,7 +7,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-(1..10).each do |num|
+(1..20).each do |num|
   user = User.new(
     username: "testuser#{num}",
     email: "testuser#{num}@test.com",
@@ -20,11 +20,18 @@
 end
 
 Book.genres.each do |genre, val|
-  Book.create(genre: val,
-              title: 'Manuscript',
-              current_step: Book.current_steps[:synopsis_submission],
-              current_step_ends_at: 5.years.from_now,
-              read_count: 0)
+  new = Book.create(genre: val,
+                    title: 'New Manuscript',
+                    current_step: Book.current_steps[:synopsis_submission],
+                    current_step_ends_at: 5.years.from_now,
+                    read_count: 0)
+
+  User.where.not(username: %w[testuser1 testuser2 testuser3]).each do |user|
+    user.synopses.for_book(new).create(title: "Title From User #{user.username}",
+                                       body: BetterLorem.p(5),
+                                       is_submitted: true)
+  end
+
   (1..20).each do |num|
     Book.create(genre: val,
                 title: "#{genre.titleize} Book #{num}",

@@ -9,7 +9,7 @@ export default {
     this.$nextTick(() => {
       flashes.forEach(flash => {
         let type = 'success';
-        if (flash[0] == 'alert') {
+        if (flash[0] == 'alert' || flash[0] == 'error') {
           type = 'error';
         }
         this.$notify({
