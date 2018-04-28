@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
+  include LastPage
+
   before_action :set_book, only: %i[show edit update destroy]
 
   # GET /books
@@ -11,7 +13,7 @@ class BooksController < ApplicationController
     paginate_books
     respond_to do |format|
       format.html
-      format.json { render json: { last: @books.last_page?, books: @books } }
+      format.json { render json: { last: last_page?(@books), books: @books } }
     end
   end
 

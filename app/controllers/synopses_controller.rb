@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SynopsesController < ApplicationController
+  include LastPage
+
   before_action :set_book
   before_action :set_synopsis, only: %i[show edit update destroy]
   before_action :check_user_signed_in, only: %i[new edit create update]
@@ -14,7 +16,7 @@ class SynopsesController < ApplicationController
     page = params[:page] if request.format.json?
     page ||= 1
     @synopses = Synopsis.where(book_id: @book.id).page(page).per(10)
-    @synopses_complete = @synopses.last_page?
+    @synopses_complete = last_page? @synopses
     respond_to do |format|
       format.html
       format.json { render json: { last: @synopses_complete, submissions: @synopses } }
