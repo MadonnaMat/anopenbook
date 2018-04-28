@@ -9,3 +9,14 @@ en:
       synopsis: "Synopsis"
       cover_art: "Cover Art"
       title: "Title"
+  user:
+    not_logged_in: "You are not logged in"
+  synopsis:
+    write_your_synopsis: "Write Your Synopsis"
+    working_title: "Working Title:"
+    created: 'Synopsis successfuly created'
+    already_published: 'Cannot edit a Synopsis that has already been published!'
+    synopsis_tile: 'Synopsis: ${title}'
+  controls:
+    save: 'Save'
+    publish: 'Publish'

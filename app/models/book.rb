@@ -95,7 +95,7 @@ class Book < ApplicationRecord
     return if cover.attached?
     require 'securerandom'
 
-    img_loc = Tempfile.new(['cover', '.png'])
+    img_loc = Tempfile.new(["cover-#{SecureRandom.hex}", '.png'])
 
     MiniMagick::Tool::Convert.new do |i|
       i.size '510x780'

@@ -15,3 +15,6 @@
       .col-auto
         %h4
           = render partial: 'books/countdown', locals: {book: book}
+    .row
+      %scrollsubmissions{first_page: submissions.to_json, type: type, init_complete: submissions_complete,
+                          'link-get': url_for(controller: type.pluralize, action: 'index', book_id: book.friendly_id, chapter: chapter, only_path: true )}

@@ -13,8 +13,12 @@ class Submission < ApplicationRecord
   belongs_to :book
   belongs_to :parent, class_name: 'Submission', required: false
 
-  scope :synopses, -> { where(type: 'Synopses') }
+  scope :synopses, -> { where(type: 'Synopsis') }
   scope :includeds, -> { where(is_included: true) }
+
+  def self.descendants
+    [Synopsis, CoverArt, Chapter, Title]
+  end
 
   def slug_canidates
     [

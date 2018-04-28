@@ -1,6 +1,11 @@
-%p#notice= notice
-
-
-= link_to 'Edit', edit_synopsis_path(@synopsis)
-\|
-= link_to 'Back', synopses_path
+.row.mt-5
+  .col-sm-12
+    .row
+      .col-auto.mr-auto
+        %h2= t('synopsis.synopsis_title', {title: @synopsis.title})
+.row
+  .col-auto.mr-auto
+    %h4= @book.genre.titleize
+.row
+  .col-lg-12
+    = sanitize @synopsis.body
