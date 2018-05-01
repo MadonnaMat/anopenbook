@@ -8,6 +8,11 @@ $slick-arrow-color: black !default;
 @import '~slick-carousel/slick/slick.scss';
 @import '~slick-carousel/slick/slick-theme.scss';
 @import 'vue-wysiwyg/dist/vueWysiwyg.css';
+
+body {
+  background-color: #fbfbfb;
+}
+
 .notification.styled-notification {
   padding: 10px;
   margin: 0 5px 5px;
@@ -36,6 +41,7 @@ $slick-arrow-color: black !default;
 
 .cover_div {
   padding: 5%;
+  background-color: #ffffff;
 
   img {
     border: 1px solid #343a40;
