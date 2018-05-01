@@ -88,11 +88,11 @@ document.addEventListener('turbolinks:load', () => {
     mounted() {
       let onPage = this.$el.attributes['on-page'];
       this.setOnPage(onPage ? onPage.value : null);
-      this.inputEcho = $('.input-echo').data('value');
+      this.inputEcho = $('.input-echo').data('value') || '';
     },
     methods: {
       setInputEcho(val) {
-        this.inputEcho = val.api.origElements.innerHTML;
+        this.inputEcho = val.api.origElements.innerHTML || '';
       },
       ...mapMutations(['setOnPage']),
     },
