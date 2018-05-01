@@ -6,8 +6,7 @@
       .col-auto.mr-auto
         %h2= text
       .col-auto
-        %submitbutton{":logged-in": "loggedIn",
-                      type: type,
+        %submitbutton{type: type,
                       link: {new: url_for(controller: type.pluralize, action: 'new', book_id: book.friendly_id, chapter: chapter, only_path: true )}}
     .row
       .col-auto.mr-auto

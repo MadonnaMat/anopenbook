@@ -32,6 +32,7 @@
 
 <script>
 import $ from 'jquery';
+import {mapState, mapMutations} from 'vuex';
 import linkArray from './link_array';
 export default {
   data() {
@@ -52,6 +53,7 @@ export default {
     tPassword() {
       return this.$t('login.password');
     },
+    ...mapState(['loggedIn', 'onPage']),
   },
   props: linkArray([
     'login',
@@ -60,9 +62,9 @@ export default {
     'forgot_password',
     'confirmation_resend',
     'edit',
-  ]).concat(['user', 'onPage']),
+  ]).concat(['user']),
   created() {
-    this.$emit('loggedin', !!this.username);
+    this.setLoggedIn(!!this.username);
   },
   methods: {
     onSubmit(e) {
@@ -75,7 +77,7 @@ export default {
           this.username = resp.data.username;
           this.axios.get('/token').then(res => {
             $('meta[name="csrf-token"]').attr('content', res.data.token);
-            this.$emit('loggedin', true);
+            this.setLoggedIn(true);
           });
         })
         .catch(error => {
@@ -96,10 +98,15 @@ export default {
         this.$notify({text: this.$t('login.logout_success'), type: 'success'});
         this.axios.get('/token').then(res => {
           $('meta[name="csrf-token"]').attr('content', res.data.token);
-          this.$emit('loggedin', false);
+          $('input[name="authenticity_token"]').each(function() {
+            console.log($(this));
+            $(this).val(res.data.token);
+          });
+          this.setLoggedIn(false);
         });
       });
     },
+    ...mapMutations(['setLoggedIn']),
   },
 };
 </script>
