@@ -26,3 +26,4 @@ erd.pdf
 .env
 # db/seeds.rb
 storage
+*/*.swp

@@ -7,6 +7,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.1.0",
     "bootstrap-vue": "^2.0.0-rc.8",
+    "es6-promise": "^4.2.4",
     "i18next": "^11.2.3",
     "jquery": "^3.3.1",
     "js-yaml-loader": "^0.1.0",
@@ -23,7 +24,8 @@
     "vue-slick": "^1.1.12",
     "vue-template-compiler": "^2.5.16",
     "vue-turbolinks": "^2.0.2",
-    "vue-wysiwyg": "^1.7.0"
+    "vue-wysiwyg": "^1.7.0",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
