@@ -16,8 +16,8 @@ import VueI18n from 'vue-i18n';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueCountdown from '@xkeshi/vue-countdown';
-import wysiwyg from 'vue-wysiwyg';
 import infiniteScroll from 'vue-infinite-scroll';
+import mediumEditor from 'vue2-medium-editor';
 import Icon from 'vue-awesome/components/Icon';
 import App from 'vue/app.vue';
 import Login from 'vue/login.vue';
@@ -33,9 +33,6 @@ Vue.use(Notifications);
 Vue.use(VueAxios, axios);
 Vue.use(VueI18n);
 Vue.use(infiniteScroll);
-Vue.use(wysiwyg, {
-  hideModules: {link: true, image: true, separator: true},
-});
 
 Vue.component('icon', Icon);
 
@@ -67,6 +64,15 @@ document.addEventListener('turbolinks:load', () => {
     data() {
       return {
         inputEcho: '',
+        mediumOptions: {
+          toolbar: {
+            static: true,
+            sticky: true,
+            align: 'left',
+            updateOnEmptySelection: true,
+            stickyTopOffset: 15,
+          },
+        },
       };
     },
     components: {
@@ -77,12 +83,18 @@ document.addEventListener('turbolinks:load', () => {
       VueCountdown,
       Submitbutton,
       Scrollsubmissions,
+      mediumEditor,
     },
     mounted() {
       let onPage = this.$el.attributes['on-page'];
       this.setOnPage(onPage ? onPage.value : null);
       this.inputEcho = $('.input-echo').data('value');
     },
-    methods: mapMutations(['setOnPage']),
+    methods: {
+      setInputEcho(val) {
+        this.inputEcho = val.api.origElements.innerHTML;
+      },
+      ...mapMutations(['setOnPage']),
+    },
   });
 });
