@@ -52,11 +52,24 @@ body {
 .medium-editor-element {
   @extend .form-control;
   min-height: 60px;
-  margin-top: 70px;
 }
 
 .medium-editor-toolbar {
+  margin-right: 10px;
   margin-top: -10px;
+  li button {
+    padding: 0px !important;
+    height: 40px;
+    min-width: 34px;
+    &.medium-editor-button-last {
+      border-right: 1px solid #357ebd;
+    }
+  }
+}
+
+.medium-editor-faker {
+  margin: 10px 0px;
+  position: relative;
 }
 
 .inline-input {

@@ -25,7 +25,12 @@ import Sendnotification from 'vue/sendnotification.vue';
 import Bookcarousel from 'vue/bookcarousel.vue';
 import Submitbutton from 'vue/submitbutton.vue';
 import Scrollsubmissions from 'vue/scrollsubmissions.vue';
+import mediumOptions from 'vue/medium-options';
 import {mapMutations, mapState} from 'vuex';
+import fontawesome from '@fortawesome/fontawesome';
+import solid from '@fortawesome/fontawesome-free-solid';
+
+fontawesome.library.add(solid);
 
 Vue.use(TurbolinksAdapter);
 Vue.use(BootstrapVue);
@@ -64,15 +69,7 @@ document.addEventListener('turbolinks:load', () => {
     data() {
       return {
         inputEcho: '',
-        mediumOptions: {
-          toolbar: {
-            static: true,
-            sticky: true,
-            align: 'left',
-            updateOnEmptySelection: true,
-            stickyTopOffset: 15,
-          },
-        },
+        mediumOptions: mediumOptions,
       };
     },
     components: {

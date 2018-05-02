@@ -1,0 +1,28 @@
+export default {
+  buttonLabels: 'fontawesome',
+  toolbar: {
+    static: true,
+    sticky: true,
+    align: 'left',
+    updateOnEmptySelection: true,
+    stickyTopOffset: 15,
+    buttons: [
+      'bold',
+      'italic',
+      'underline',
+      'strikethrough',
+      'subscript',
+      'superscript',
+      'quote',
+      'pre',
+      'orderedlist',
+      'unorderedlist',
+      'indent',
+      'outdent',
+      'justifyLeft',
+      'justifyCenter',
+      'justifyRight',
+      'removeFormat',
+    ],
+  },
+};

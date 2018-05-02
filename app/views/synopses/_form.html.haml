@@ -15,5 +15,10 @@
         = f.text_field :title, required: true, class: 'form-control inline-input'
   .row
     .col-lg-12
+      .medium-editor-faker.medium-editor-toolbar.clearfix
+        %ul
+          - (1..17).each do |i|
+            %li
+              %button i
       %medium-editor{":text": 'inputEcho', 'v-on:edit': 'setInputEcho', ':options': 'mediumOptions'}
       = f.hidden_field :body, 'v-model': 'inputEcho', class: 'input-echo', 'data-value': @synopsis.body

@@ -2,6 +2,8 @@
   "name": "anopenbook",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.6",
+    "@fortawesome/fontawesome-free-solid": "^5.0.11",
     "@rails/webpacker": "3.4",
     "@xkeshi/vue-countdown": "^0.6.0",
     "axios": "^0.18.0",
