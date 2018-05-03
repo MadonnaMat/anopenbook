@@ -21,4 +21,4 @@
             %li
               %button i
       %medium-editor{":text": 'inputEcho', 'v-on:edit': 'setInputEcho', ':options': 'mediumOptions'}
-      = f.hidden_field :body, 'v-model': 'inputEcho', class: 'input-echo', 'data-value': @synopsis.body
+      = f.hidden_field :body, 'v-model': 'inputEcho', class: 'input-echo', 'data-value': sanitize_with_css(@synopsis.body || '')

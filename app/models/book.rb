@@ -8,6 +8,9 @@ class Book < ApplicationRecord
   enum genre: %i[romance crime science_fiction fantasy horror]
 
   friendly_id :slug_canidates, use: :history
+  validates_presence_of :title
+  validates_presence_of :genre
+  validates_presence_of :current_step
 
   has_and_belongs_to_many :users
   has_one_attached :cover

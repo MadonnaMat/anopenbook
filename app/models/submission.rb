@@ -12,6 +12,7 @@ class Submission < ApplicationRecord
   belongs_to :user
   belongs_to :book
   belongs_to :parent, class_name: 'Submission', required: false
+  before_save :sanitize_body
 
   scope :synopses, -> { where(type: 'Synopsis') }
   scope :includeds, -> { where(is_included: true) }
@@ -25,5 +26,11 @@ class Submission < ApplicationRecord
       :title,
       %i[title current_step]
     ]
+  end
+
+  private
+
+  def sanitize_body
+    self.body = sanitize_with_css(body || '')
   end
 end

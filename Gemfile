@@ -43,6 +43,8 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -64,7 +66,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'haml-rails'
-gem 'factory_bot'
 gem 'mini_magick'
 gem 'friendly_id'
 gem 'paper_trail'
@@ -80,5 +81,7 @@ gem 'cloudinary', require: false
 gem 'activestorage-cloudinary-service'
 gem 'baby_squeel'
 gem 'betterlorem'
+gem 'sanitize'
+gem 'diffy'
 
 ruby '2.5.0'

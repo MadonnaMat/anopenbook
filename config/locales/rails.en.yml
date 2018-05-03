@@ -16,7 +16,7 @@ en:
     working_title: "Working Title:"
     created: 'Synopsis successfuly created'
     already_published: 'Cannot edit a Synopsis that has already been published!'
-    synopsis_tile: 'Synopsis: ${title}'
+    synopsis_title: 'Synopsis: %{title}'
   controls:
     save: 'Save'
     publish: 'Publish'
