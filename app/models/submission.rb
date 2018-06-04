@@ -3,6 +3,7 @@
 class Submission < ApplicationRecord
   extend FriendlyId
   include CurrentStep
+  include Rails.application.routes.url_helpers
 
   friendly_id :slug_canidates, use: :history
 
@@ -28,7 +29,32 @@ class Submission < ApplicationRecord
     ]
   end
 
+  def as_json(_args)
+    super(methods: %i[author shortend_body sub_path], except: 'body')
+  end
+
+  def author
+    user.use_real_name? ? user.fullname : user.username
+  end
+
+  def shortend_body
+    Sanitize.fragment(body).truncate(200, separator: ' ')
+  end
+
+  def sub_path
+    _, _, chapter = type_step_chapter
+    url_for(controller: type.downcase.pluralize, action: 'show', id: friendly_id, book_id: book.friendly_id, chapter: chapter, only_path: true)
+  end
+
   private
+
+  def type_step_chapter
+    type, chapter, step = current_step.to_s.split('_')
+    step ||= chapter
+    type = "#{type}_#{chapter}" if chapter == 'art'
+    chapter = nil unless type == 'chapter'
+    [type, step, chapter]
+  end
 
   def sanitize_body
     self.body = sanitize_with_css(body || '')

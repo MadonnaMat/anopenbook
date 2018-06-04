@@ -61,6 +61,11 @@ class Book < ApplicationRecord
     end
   end
 
+  def voting_enabled
+    _, step, = type_step_chapter
+    step != 'submission'
+  end
+
   def slug_canidates
     [
       :title,
