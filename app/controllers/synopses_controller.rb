@@ -13,11 +13,16 @@ class SynopsesController < ApplicationController
   # GET /synopses
   # GET /synopses.json
   def index
+    redirect_to url_for(request.parameters.merge(seed: rand, only_path: true)) unless params[:seed]
     page = params[:page] if request.format.json?
     page ||= 1
+    seed = params[:seed].to_f
+    Synopsis.select("setseed(#{seed})").first
     @synopses = Synopsis.where(book_id: @book.id)
                         .submitted
-                        .page(page).per(10)
+                        .order('random()')
+                        .page(page)
+                        .per(10)
     @synopses_complete = last_page? @synopses
     @existing = existing_synopsis
     respond_to do |format|
