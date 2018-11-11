@@ -30,6 +30,8 @@ en:
         title: Horror
     submit_button:
       submit: 'Submit a %{type}'
+      view: 'View %{type}'
+      edit: 'Edit %{type}'
     submission_card:
       user: '%{type} By: %{username}'
       no_vote: 'Voting Disabled During Submission'
