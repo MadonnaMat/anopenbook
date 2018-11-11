@@ -19,4 +19,4 @@
     .row
       %scrollsubmissions{first_page: submissions.to_json, type: type, init_complete: submissions_complete, votable: "#{book.voting_enabled}",
         'link-get': url_for(controller: type.pluralize, action: 'index',
-                            book_id: book.friendly_id, chapter: chapter, only_path: true )}
+                            book_id: book.friendly_id, chapter: chapter, seed: seed, only_path: true )}
