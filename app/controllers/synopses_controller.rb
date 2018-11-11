@@ -15,8 +15,11 @@ class SynopsesController < ApplicationController
   def index
     page = params[:page] if request.format.json?
     page ||= 1
-    @synopses = Synopsis.where(book_id: @book.id).page(page).per(10)
+    @synopses = Synopsis.where(book_id: @book.id)
+                        .submitted
+                        .page(page).per(10)
     @synopses_complete = last_page? @synopses
+    @existing = existing_synopsis
     respond_to do |format|
       format.html
       format.json { render json: { last: @synopses_complete, submissions: @synopses } }
@@ -124,7 +127,7 @@ class SynopsesController < ApplicationController
   end
 
   def redirect_if_exists
-    synopsis = current_user.synopses.for_book(@book).first
+    synopsis = existing_synopsis
     if synopsis
       redirect_to(action: 'edit', controller: 'synopses', book_id: @book.friendly_id, id: synopsis.friendly_id)
     end
@@ -135,5 +138,9 @@ class SynopsesController < ApplicationController
       flash[:error] = I18n.t('synopsis.already_published')
       redirect_to(action: 'show', controller: 'synopses', book_id: @book.friendly_id, id: @synopsis.try(:friendly_id))
     end
+  end
+
+  def existing_synopsis
+    current_user.synopses.for_book(@book).first
   end
 end

@@ -1,4 +1,5 @@
 - chapter ||= nil
+- existing ||= nil
 .row.mt-5
   .col-sm-12
     - text, url = book.transition_and_translation
@@ -6,8 +7,9 @@
       .col-auto.mr-auto
         %h2= text
       .col-auto
-        %submitbutton{type: type,
-                      link: {new: url_for(controller: type.pluralize, action: 'new', book_id: book.friendly_id, chapter: chapter, only_path: true )}}
+        %submitbutton{type: type, link: { new: url_for(controller: type.pluralize, action: 'new', book_id: book.friendly_id, chapter: chapter, only_path: true ),
+          edit: (url_for(controller: type.pluralize, action: 'edit', book_id: book.friendly_id, chapter: chapter, id: existing.friendly_id, only_path: true) if existing ),
+          view: (url_for(controller: type.pluralize, action: 'show', book_id: book.friendly_id, chapter: chapter, id: existing.friendly_id, only_path: true) if existing&.is_submitted ) } }
     .row
       .col-auto.mr-auto
         %h4= @book.genre.titleize

@@ -79,7 +79,6 @@ gem 'sendgrid-ruby'
 gem 'kaminari'
 gem 'cloudinary', require: false
 gem 'activestorage-cloudinary-service'
-gem 'baby_squeel'
 gem 'betterlorem'
 gem 'sanitize'
 gem 'diffy'

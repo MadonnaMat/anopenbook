@@ -19,7 +19,7 @@ class Book < ApplicationRecord
   before_save :ensure_cover
 
   default_scope do
-    ordering { current_step == Book.current_steps[:complete] }
+    order("current_step = #{Book.current_steps[:complete]}")
       .order(read_count: :desc)
   end
 
