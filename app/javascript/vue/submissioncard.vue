@@ -44,11 +44,13 @@ export default {
       window.location = this.attributes.sub_path;
     },
     toggleVote() {
-      this.axios.post(this.attributes.vote_path).then(({data}) => {
-        this.submission = data.data;
-        this.attributes = data.data.attributes;
-        this.setVotesLeft(data.meta.votes_left);
-      });
+      if (this.isVotable) {
+        this.axios.post(this.attributes.vote_path).then(({data}) => {
+          this.submission = data.data;
+          this.attributes = data.data.attributes;
+          this.setVotesLeft(data.meta.votes_left);
+        });
+      }
     },
     ...mapMutations(['setVotesLeft']),
   },
