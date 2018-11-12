@@ -7,7 +7,7 @@ class Submission < ApplicationRecord
 
   friendly_id :slug_canidates, use: :history
 
-  acts_as_votable
+  acts_as_votable cacheable_strategy: :update_columns
   has_paper_trail only: [:body]
 
   belongs_to :user
@@ -17,10 +17,6 @@ class Submission < ApplicationRecord
 
   scope :synopses, -> { where(type: 'Synopsis') }
   scope :includeds, -> { where(is_included: true) }
-
-  def self.descendants
-    [Synopsis, CoverArt, Chapter, Title]
-  end
 
   def slug_canidates
     [
@@ -44,6 +40,11 @@ class Submission < ApplicationRecord
   def sub_path
     _, _, chapter = type_step_chapter
     url_for(controller: type.downcase.pluralize, action: 'show', id: friendly_id, book_id: book.friendly_id, chapter: chapter, only_path: true)
+  end
+
+  def vote_path
+    _, _, chapter = type_step_chapter
+    url_for(controller: type.downcase.pluralize, action: 'vote', id: friendly_id, book_id: book.friendly_id, chapter: chapter, only_path: true)
   end
 
   private

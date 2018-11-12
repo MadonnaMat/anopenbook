@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     loggedIn: false,
     onPage: null,
+    votesLeft: 0,
   },
   mutations: {
     setLoggedIn(state, loggedIn) {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     setOnPage(state, page) {
       state.onPage = page;
+    },
+    setVotesLeft(state, votes) {
+      state.votesLeft = parseInt(votes);
     },
   },
 });

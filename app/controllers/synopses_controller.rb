@@ -4,8 +4,8 @@ class SynopsesController < ApplicationController
   include LastPage
 
   before_action :set_book
-  before_action :set_synopsis, only: %i[show edit update destroy]
-  before_action :check_user_signed_in, only: %i[new edit create update]
+  before_action :set_synopsis, only: %i[show edit update destroy vote]
+  before_action :check_user_signed_in, only: %i[new edit create update vote]
   before_action :redirect_if_exists, only: %i[new create]
   before_action :redirect_if_published, only: %i[edit update]
   before_action :redirect_unless_friendly
@@ -25,9 +25,18 @@ class SynopsesController < ApplicationController
                         .per(10)
     @synopses_complete = last_page? @synopses
     @existing = existing_synopsis
+
+    setup_votes
+
     respond_to do |format|
       format.html
-      format.json { render json: { last: @synopses_complete, submissions: @synopses } }
+      format.json do
+        render json: SubmissionSerializer.new(@synopses,
+                                              params: { current_user: current_user },
+                                              meta: {
+                                                last: @synopses_complete
+                                              }).to_json
+      end
     end
   end
 
@@ -102,6 +111,22 @@ class SynopsesController < ApplicationController
     end
   end
 
+  def vote
+    if @book.voting_enabled?
+      if current_user.voted_for? @synopsis
+        @synopsis.unliked_by current_user
+      else
+        @synopsis.liked_by current_user
+      end
+    end
+
+    setup_votes
+
+    render json: SubmissionSerializer.new(@synopsis,
+                                          params: { current_user: current_user },
+                                          meta: { votes_left: @votes_left }).to_json
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -147,5 +172,9 @@ class SynopsesController < ApplicationController
 
   def existing_synopsis
     current_user.synopses.for_book(@book).first
+  end
+
+  def setup_votes
+    @votes_left = 5 - @book.get_user_votes(current_user, Synopsis).count if @book.voting_enabled?
   end
 end

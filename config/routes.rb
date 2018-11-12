@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   resources :books do
     resources :titles
     resources :cover_arts
-    resources :synopses
+    resources :synopses do
+      member do
+        post :vote
+      end
+    end
   end
 
   scope '/books/:book_id/chapters/:chapter' do

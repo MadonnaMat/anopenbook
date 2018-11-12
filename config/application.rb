@@ -21,5 +21,7 @@ module Anopenbook
       g.orm :active_record, primary_key_type: :uuid
       g.jbuilder false
     end
+
+    Dir[Rails.root.join('app/serializers/**/*.rb')].sort.each { |f| require f }
   end
 end
