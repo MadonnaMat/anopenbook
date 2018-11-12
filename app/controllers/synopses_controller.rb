@@ -112,15 +112,17 @@ class SynopsesController < ApplicationController
   end
 
   def vote
+    setup_votes
+
     if @book.voting_enabled?
       if current_user.voted_for? @synopsis
         @synopsis.unliked_by current_user
-      else
+        @votes_left += 1
+      elsif @votes_left > 0
         @synopsis.liked_by current_user
+        @votes_left -= 1
       end
     end
-
-    setup_votes
 
     render json: SubmissionSerializer.new(@synopsis,
                                           params: { current_user: current_user },
