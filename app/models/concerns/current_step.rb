@@ -24,18 +24,7 @@ module CurrentStep
       unless step.is_a?(Integer) || step.is_a?(String) || step.is_a?(Symbol)
         raise 'Step must be a string, symbol, or int'
       end
-      new_step = self.class.current_steps[step] ||
-                 if step.is_a?(Integer)
-                   step
-                 else
-                   c, c_num, c_step = step.to_s.split('_')
-                   unless c == 'chapter' && c_num && c_step && c_num = c_num.to_i
-                     raise 'Invalid Key'
-                   end
-                   c_num = (c_num - 1) * 2 + 8
-                   c_num += 1 unless c_step == 'submission'
-                   c_num
-                 end
+      new_step = self.class.new_step(step)
       super(new_step)
       current_step
     end
@@ -48,6 +37,28 @@ module CurrentStep
                            title_submission title_voting null complete].each_with_index.each_with_object({}) do |(v, i), hsh|
         hsh[v] = i
       end.with_indifferent_access
+    end
+
+    def get_current_step(step)
+      unless step.is_a?(Integer) || step.is_a?(String) || step.is_a?(Symbol)
+        raise 'Step must be a string, symbol, or int'
+      end
+      new_step(step)
+    end
+
+    def new_step(step)
+      current_steps[step] ||
+        if step.is_a?(Integer)
+          step
+        else
+          c, c_num, c_step = step.to_s.split('_')
+          unless c == 'chapter' && c_num && c_step && c_num = c_num.to_i
+            raise 'Invalid Key'
+          end
+          c_num = (c_num - 1) * 2 + 8
+          c_num += 1 unless c_step == 'submission'
+          c_num
+        end
     end
   end
 end

@@ -19,7 +19,7 @@ class Book < ApplicationRecord
   before_save :ensure_cover
 
   default_scope do
-    order("current_step = #{Book.current_steps[:complete]}")
+    order(Book.arel_table[:current_step].eq Book.current_steps[:complete])
       .order(read_count: :desc)
   end
 
@@ -61,9 +61,15 @@ class Book < ApplicationRecord
     end
   end
 
-  def voting_enabled
+  def voting_enabled?
     _, step, = type_step_chapter
     step != 'submission'
+  end
+
+  def get_user_votes(user, type, chapter = nil)
+    where = { books: { id: id } }
+    where[:current_step] = chapter if chapter
+    user.get_voted(type).joins(:book).where(where)
   end
 
   def slug_canidates

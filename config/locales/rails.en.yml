@@ -6,7 +6,7 @@ en:
     voting_step: "%{type} Voting is Open!"
     submission:
       chapter: "Chapter %{ch}"
-      synopsis: "Synopsis"
+      synopsis: "Manuscript"
       cover_art: "Cover Art"
       title: "Title"
   user:

@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       page: 1,
-      submissions: JSON.parse(this.first_page || '[]'),
+      submissions: JSON.parse(this.first_page || '{}').data || [],
       complete: this.init_complete,
       moving: false,
       busy: false,
@@ -42,10 +42,10 @@ export default {
               page: this.page,
             },
           })
-          .then(({data}) => {
-            let {submissions, last} = data;
-            this.complete = last;
-            this.submissions = this.submissions.concat(submissions);
+          .then(returned => {
+            let {data, meta} = returned.data;
+            this.complete = meta.last;
+            this.submissions = this.submissions.concat(data);
             this.busy = this.complete;
           });
       }
@@ -54,5 +54,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

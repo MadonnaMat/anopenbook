@@ -25,6 +25,7 @@ import Sendnotification from 'vue/sendnotification.vue';
 import Bookcarousel from 'vue/bookcarousel.vue';
 import Submitbutton from 'vue/submitbutton.vue';
 import Scrollsubmissions from 'vue/scrollsubmissions.vue';
+import Votesleft from 'vue/votesleft.vue';
 import mediumOptions from 'vue/medium-options';
 import {mapMutations, mapState} from 'vuex';
 import fontawesome from '@fortawesome/fontawesome';
@@ -81,6 +82,7 @@ document.addEventListener('turbolinks:load', () => {
       Submitbutton,
       Scrollsubmissions,
       mediumEditor,
+      Votesleft,
     },
     mounted() {
       let onPage = this.$el.attributes['on-page'];

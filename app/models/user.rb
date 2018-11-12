@@ -13,6 +13,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
   friendly_id :username, use: :history
 
+  acts_as_voter
+
   has_and_belongs_to_many :books
   has_one_attached :avatar
   has_many :submissions

@@ -32,6 +32,8 @@ en:
       submit: 'Submit a %{type}'
       view: 'View %{type}'
       edit: 'Edit %{type}'
+    votes_left:
+      msg: 'No Votes Left | %{count} vote left | %{count} votes left'
     submission_card:
       user: '%{type} By: %{username}'
       no_vote: 'Voting Disabled During Submission'
